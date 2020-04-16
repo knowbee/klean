@@ -8,9 +8,9 @@ const clear = require("clear");
 clear();
 
 console.log(
-  chalk.magenta(figlet.textSync("figlet", { horizontalLayout: "full" }))
+  chalk.magenta(figlet.textSync("klean", { horizontalLayout: "full" }))
 );
-
+console.log();
 const slack = os.homedir() + "\\AppData\\Roaming\\Slack\\Cache";
 const chrome =
   os.homedir() + "\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache";
@@ -20,6 +20,11 @@ const cachesDirs = [
   { name: "chrome", path: chrome },
 ];
 
+if (os.platform() != "win32") {
+  console.log();
+  spinner.fail("Your platform not supported yet");
+  process.exit(0);
+}
 // get cached media size
 const cacheChecker = (dir) => {
   const files = fs.readdirSync(dir);
@@ -42,15 +47,12 @@ const getTotalSize = () => {
 };
 // delete cached media from the system
 const deleteCache = () => {
-  spinner.start("starting clean up process.." + "\n");
-
   try {
     cachesDirs.forEach((cacheDir) => {
       const files = fs.readdirSync(cacheDir.path);
       files.forEach((file) => {
         fs.unlinkSync(cacheDir.path + "\\" + file);
       });
-      console.log("cleaning ", cacheDir.name);
     });
     spinner.succeed("Done");
   } catch (error) {
@@ -58,5 +60,6 @@ const deleteCache = () => {
     process.exit(0);
   }
 };
-console.log("Found", getTotalSize(), "of cached media");
+console.log("Found", chalk.green(getTotalSize()), "of cached media");
+console.log(chalk.yellowBright("starting clean up process.." + "\n"));
 deleteCache();
