@@ -5,16 +5,16 @@ const spinner = require("ora")();
 const chalk = require("chalk");
 const figlet = require("figlet");
 const clear = require("clear");
-const user = os.homedir();
+const path = require("path");
+const user = path.join(os.homedir()).split("\\").join("/");
 clear();
-
 console.log(
   chalk.magenta(figlet.textSync("klean", { horizontalLayout: "full" }))
 );
 console.log();
 
-let slack = `${user}\\AppData\\Roaming\\Slack\\Cache`;
-let chrome = `${user}\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache`;
+let slack = `${user}/AppData/Roaming/Slack/Cache`;
+let chrome = `${user}/AppData/Local/Google/Chrome/User Data/Default/Cache`;
 let discord = `${user}/AppData/Roaming/discord/Cache`;
 let discord_canary = `${user}/AppData/Roaming/discordcanary/Cache`;
 let discord_ptb = `${user}/AppData/Roaming/discordptb/Cache`;
@@ -47,7 +47,7 @@ const cachesDirs = [
 const cacheChecker = (dir) => {
   const files = fs.readdirSync(dir);
   const sum = files.reduce((sum, file) => {
-    sum += fs.statSync(dir + "\\" + file).size;
+    sum += fs.statSync(dir.split("\\").join("/") + "/" + file).size;
     return sum;
   }, 0);
   return sum;
@@ -74,7 +74,7 @@ const deleteCache = () => {
       if (fs.existsSync(cacheDir.path)) {
         const files = fs.readdirSync(cacheDir.path);
         files.forEach((file) => {
-          fs.unlinkSync(cacheDir.path + "\\" + file);
+          fs.unlinkSync(cacheDir.path + "/" + file);
         });
       }
     });
