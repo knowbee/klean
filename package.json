@@ -3,9 +3,12 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
-  "description": "",
+  "description": "sensitive data can lead to your downfall, do the right thing and delete them",
   "bin": {
     "klean": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,8 @@
 # klean
 
-    You would be surprised if you knew that images and videos you see online are never deleted from your computer,and they say sensitive data can lead to one's downfall🤷‍♀️....well klean's coming to the rescue
+    sensitive data can lead to your downfall🤷‍♀️
+
+You would be surprised if you knew that images and videos you see online are never deleted from your computer....well klean's coming to the rescue
 
 ## Installation
 
