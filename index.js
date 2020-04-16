@@ -1,6 +1,15 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const os = require("os");
+const spinner = require("ora")();
+const chalk = require("chalk");
+const figlet = require("figlet");
+const clear = require("clear");
+clear();
+
+console.log(
+  chalk.magenta(figlet.textSync("figlet", { horizontalLayout: "full" }))
+);
 
 const slack = os.homedir() + "\\AppData\\Roaming\\Slack\\Cache";
 const chrome =
@@ -33,6 +42,8 @@ const getTotalSize = () => {
 };
 // delete cached media from the system
 const deleteCache = () => {
+  spinner.start("starting clean up process.." + "\n");
+
   try {
     cachesDirs.forEach((cacheDir) => {
       const files = fs.readdirSync(cacheDir.path);
@@ -41,12 +52,11 @@ const deleteCache = () => {
       });
       console.log("cleaning ", cacheDir.name);
     });
+    spinner.succeed("Done");
   } catch (error) {
     console.log(`You should close open applications to clean everything `);
     process.exit(0);
   }
 };
-console.log("Found", getTotalSize(), " of cached media");
-console.log("starting clean up process..");
+console.log("Found", getTotalSize(), "of cached media");
 deleteCache();
-console.log("Done");
