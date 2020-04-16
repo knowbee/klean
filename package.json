@@ -1,0 +1,28 @@
+{
+  "name": "klean",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "",
+  "bin": {
+    "klean": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knowbee/klean.git"
+  },
+  "keywords": [
+    "cache remover",
+    "cache",
+    "remove cache"
+  ],
+  "author": "Igwaneza Bruce <knowbeeinc@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/knowbee/klean/issues"
+  },
+  "homepage": "https://github.com/knowbee/klean#readme",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "ora": "^4.0.3"
+  }
+}
