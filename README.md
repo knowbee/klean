@@ -1,5 +1,9 @@
 # klean
 
+[![Build Status](https://travis-ci.com/knowbee/klean.svg?token=yN9jXnk59suszMqNsJJb&branch=master)](https://travis-ci.com/knowbee/klean)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+
     sensitive data can lead to your downfall🤷‍♀️
 
 You would be surprised if you knew that images and videos you see online are never deleted from your computer....well klean's coming to the rescue
