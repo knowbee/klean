@@ -57,7 +57,9 @@ const getTotalSize = () => {
       total += cacheChecker(cacheDir.path);
     }
   });
-  if (total.toString().length > 6)
+  if (total.toString().length >= 12)
+    return Math.floor(total / (1024 * 1024 * 1024)).toString() + " Gbs";
+  if (total.toString().length <= 9)
     return Math.floor(total / (1024 * 1024)).toString() + " Mbs";
   if (total.toString().length <= 6)
     return Math.floor(total / 1024).toString() + " Kbs";
