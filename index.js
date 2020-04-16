@@ -5,26 +5,29 @@ const spinner = require("ora")();
 const chalk = require("chalk");
 const figlet = require("figlet");
 const clear = require("clear");
+const user = os.homedir();
 clear();
 
 console.log(
   chalk.magenta(figlet.textSync("klean", { horizontalLayout: "full" }))
 );
 console.log();
-const slack = os.homedir() + "\\AppData\\Roaming\\Slack\\Cache";
-const chrome =
-  os.homedir() + "\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache";
 
+let slack = `${user}\\AppData\\Roaming\\Slack\\Cache`;
+let chrome = `${user}\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache`;
+
+if (os.platform() === "linux") {
+  chrome = `${user}/.cache/google-chrome/Default/Cache/`;
+  slack = `${user}/.config/Slack/Cache`;
+}
+if (os.platform() === "darwin") {
+  chrome = `${user}/Library/Application\ Support/Google/Chrome/Default/Application\ Cache/Cache`;
+  slack = `${user}/Library/Application Support/Slack/Cache`;
+}
 const cachesDirs = [
   { name: "slack", path: slack },
   { name: "chrome", path: chrome },
 ];
-
-if (os.platform() != "win32") {
-  console.log();
-  spinner.fail("Your platform not supported yet");
-  process.exit(0);
-}
 // get cached media size
 const cacheChecker = (dir) => {
   const files = fs.readdirSync(dir);
