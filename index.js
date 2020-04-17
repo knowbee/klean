@@ -19,6 +19,7 @@ let discord = `${user}/AppData/Roaming/discord/Cache`;
 let discord_canary = `${user}/AppData/Roaming/discordcanary/Cache`;
 let discord_ptb = `${user}/AppData/Roaming/discordptb/Cache`;
 let notion = `${user}/AppData/Roaming/Notion/Cache`;
+
 if (os.platform() === "linux") {
   chrome = `${user}/.cache/google-chrome/Default/Cache/`;
   slack = `${user}/.config/Slack/Cache`;
@@ -60,12 +61,14 @@ const getTotalSize = () => {
       total += cacheChecker(cacheDir.path);
     }
   });
-  if (total.toString().length >= 12)
-    return Math.floor(total / (1024 * 1024 * 1024)).toString() + " Gbs";
-  if (total.toString().length <= 9)
-    return Math.floor(total / (1024 * 1024)).toString() + " Mbs";
-  if (total.toString().length <= 6)
-    return Math.floor(total / 1024).toString() + " Kbs";
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+  if (total == 0) {
+    console.log(chalk.green("No cached media found"));
+    process.exit(0);
+  }
+  const i = parseInt(Math.floor(Math.log(total) / Math.log(1024)));
+  if (i == 0) return `${total} ${sizes[i]}`;
+  return `${(total / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
 };
 // delete cached media from the system
 const deleteCache = () => {
@@ -84,6 +87,7 @@ const deleteCache = () => {
     process.exit(0);
   }
 };
+
 console.log("Found", chalk.green(getTotalSize()), "of cached media");
 console.log(chalk.yellowBright("starting clean up process.." + "\n"));
 deleteCache();
