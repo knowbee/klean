@@ -6,12 +6,15 @@ const chalk = require("chalk");
 const figlet = require("figlet");
 const clear = require("clear");
 const path = require("path");
+const { helper } = require("./lib/klean");
 const user = path.join(os.homedir()).split("\\").join("/");
+
 clear();
 console.log(
   chalk.magenta(figlet.textSync("klean", { horizontalLayout: "full" }))
 );
 console.log();
+helper();
 
 let slack = `${user}/AppData/Roaming/Slack/Cache`;
 let chrome = `${user}/AppData/Local/Google/Chrome/User Data/Default/Cache`;
