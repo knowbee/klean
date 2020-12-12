@@ -22,6 +22,7 @@ let discord = `${user}/AppData/Roaming/discord/Cache`;
 let discord_canary = `${user}/AppData/Roaming/discordcanary/Cache`;
 let discord_ptb = `${user}/AppData/Roaming/discordptb/Cache`;
 let notion = `${user}/AppData/Roaming/Notion/Cache`;
+let microsoft_edge = `${user}/AppData/Local/Microsoft/Edge/User Data/Default/Cache`;
 
 if (os.platform() === "linux") {
   chrome = `${user}/.cache/google-chrome/Default/Cache/`;
@@ -30,6 +31,7 @@ if (os.platform() === "linux") {
   discord_canary = `${user}/.config/discordcanary/Cache`;
   discord_ptb = `${user}/.config/discordptb/Cache`;
   notion = `${user}/.config/Notion/Cache`;
+  microsoft_edge = `${user}/.cache/microsoft-edge-dev/Default/Cache`;
 }
 if (os.platform() === "darwin") {
   chrome = `${user}/Library/Application\ Support/Google/Chrome/Default/Application\ Cache/Cache`;
@@ -38,6 +40,7 @@ if (os.platform() === "darwin") {
   discord_canary = `${user}/Library/Application Support/discordcanary/Cache`;
   discord_ptb = `${user}/Library/Application Support/discordptb/Cache`;
   notion = `${user}/Library/Application Support/Notion/Cache`;
+  microsoft_edge = `${user}/Library/Caches/Microsoft\ Edge/Default/Cache`;
 }
 const cachesDirs = [
   { name: "slack", path: slack },
@@ -46,6 +49,7 @@ const cachesDirs = [
   { name: "discord_canary", path: discord_canary },
   { name: "discord_ptb", path: discord_ptb },
   { name: "notion", path: notion },
+  { name: "microsoft_edge", path: microsoft_edge },
 ];
 // get cached media size
 const cacheChecker = (dir) => {
