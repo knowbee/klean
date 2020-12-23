@@ -70,7 +70,7 @@ const getTotalSize = () => {
   });
   const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
   if (total == 0) {
-    console.log(chalk.green("No cached media found"));
+    console.log(chalk.green("You are safe!"));
     process.exit(0);
   }
   const i = parseInt(Math.floor(Math.log(total) / Math.log(1024)));
@@ -82,15 +82,21 @@ const deleteCache = () => {
   try {
     cachesDirs.forEach((cacheDir) => {
       if (fs.existsSync(cacheDir.path)) {
-        const files = fs.readdirSync(cacheDir.path);
-        files.forEach((file) => {
-          fs.unlinkSync(cacheDir.path + "/" + file);
+        let files = fs.readdirSync(cacheDir.path);
+        files.forEach((f) => {
+          let hiddenPath = `${cacheDir.path}/${f}`;
+          if (fs.lstatSync(hiddenPath).isDirectory()) {
+            // delete hidden folders inside cached dirs
+            fs.rmdirSync(hiddenPath, { recursive: true });
+          } else {
+            fs.unlinkSync(`${cacheDir.path}/${file}`);
+          }
         });
       }
     });
     spinner.succeed("Done");
   } catch (error) {
-    console.log(`You should close open applications to clean everything `);
+    console.log(`Please close open applications to delete everything`);
     process.exit(0);
   }
 };
