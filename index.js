@@ -89,13 +89,14 @@ const deleteCache = () => {
             // delete hidden folders inside cached dirs
             fs.rmdirSync(hiddenPath, { recursive: true });
           } else {
-            fs.unlinkSync(`${cacheDir.path}/${file}`);
+            fs.unlinkSync(`${cacheDir.path}/${f}`);
           }
         });
       }
     });
     spinner.succeed("Done");
   } catch (error) {
+    console.log(error);
     console.log(`Please close open applications to delete everything`);
     process.exit(0);
   }
