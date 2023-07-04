@@ -83,6 +83,7 @@ const deleteCache = () => {
     cachesDirs.forEach((cacheDir) => {
       if (fs.existsSync(cacheDir.path)) {
         let files = fs.readdirSync(cacheDir.path);
+        spinner.start(`Cleaning ${cacheDir.name} cache...`);
         files.forEach((f) => {
           let hiddenPath = `${cacheDir.path}/${f}`;
           if (fs.lstatSync(hiddenPath).isDirectory()) {
@@ -92,9 +93,10 @@ const deleteCache = () => {
             fs.unlinkSync(`${cacheDir.path}/${f}`);
           }
         });
+        spinner.succeed(`Finished cleaning ${cacheDir.name} cache`);
       }
     });
-    spinner.succeed("Done");
+    spinner.succeed("Cleanup completed");
   } catch (error) {
     console.log(error);
     console.log(`Please close open applications to delete everything`);
@@ -103,5 +105,5 @@ const deleteCache = () => {
 };
 
 console.log("Found", chalk.green(getTotalSize()), "of cached media");
-console.log(chalk.yellowBright("starting clean up process.." + "\n"));
+console.log(chalk.yellowBright("Starting cleanup process...\n"));
 deleteCache();
