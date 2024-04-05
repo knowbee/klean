@@ -1,14 +1,14 @@
 {
   "name": "klean",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "index.js",
   "license": "MIT",
-  "description": "sensitive data can lead to your downfall, do the right thing and delete them",
+  "description": "A simple cache remover",
   "bin": {
-    "klean": "index.js"
+    "klean": "src/index.js"
   },
   "scripts": {
-    "build": "rimraf dist && tsc && rollup -c rollup.config.js"
+    "run": "node src/index.js"
   },
   "repository": {
     "type": "git",
